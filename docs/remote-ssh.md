@@ -11,9 +11,10 @@ Akses ke server Gonku hanya diizinkan melalui jalur terenkripsi SSH menggunakan 
 
 Kami menerapkan prinsip *Strict Individual Access* untuk memastikan keamanan dan kemudahan audit.
 
-*   **Satu User Satu Orang**
-    *   Setiap anggota tim wajib memiliki akun sistem sendiri yang dibuat oleh administrator.
-    *   Penggunaan satu akun secara bersama-sama (sharing account) sangat dilarang.
+::: warning SATU USER SATU ORANG
+Setiap anggota tim wajib memiliki akun sistem sendiri. Penggunaan satu akun secara bersama-sama (sharing account) sangat dilarang untuk menjaga integritas audit log server.
+:::
+
 *   **Keuntungan Akun Individu**
     *   Audit Log: Memudahkan pelacakan jika terjadi kesalahan konfigurasi atau masalah keamanan.
     *   Isolasi Environment: File dan konfigurasi pribadi tersimpan aman di direktori home masing-masing.
@@ -21,6 +22,10 @@ Kami menerapkan prinsip *Strict Individual Access* untuk memastikan keamanan dan
 ## 2. Prosedur Pengaturan SSH Key
 
 Gunakan algoritma ed25519 untuk keamanan dan performa terbaik.
+
+::: tip KEAMANAN KUNCI
+Sangat disarankan untuk menambahkan passphrase saat membuat SSH Key untuk memberikan lapisan perlindungan tambahan jika perangkat lokal Anda hilang atau diakses pihak lain.
+:::
 
 *   **Pembuatan Key di Lokal (Windows/Linux/Mac)**
     *   Command: Jalankan `ssh-keygen -t ed25519 -C "nama_anda"`.

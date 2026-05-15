@@ -23,13 +23,20 @@ Keandalan layanan mandiri bertumpu pada stabilitas pengelolaan perangkat keras d
 *   **Mekanisme Pengendalian Daya Jarak Jauh**
     *   Integrasi Teknologi: Penggunaan ekosistem Bardi Smart Home yang dikombinasikan dengan modul relay fisik.
     *   Fungsi Administrator: Akses penuh via aplikasi seluler untuk prosedur Power On, Power Off, dan Hard Reboot.
-    *   Mitigasi Kritis: Jalur kendali daya fisik berfungsi sebagai solusi akhir jika akses remote SSH mengalami system freeze.
+
+::: warning MITIGASI KRITIS
+Jalur kendali daya fisik berfungsi sebagai solusi akhir jika akses remote SSH mengalami system freeze yang tidak dapat diatasi melalui jalur perangkat lunak.
+:::
 
 ---
 
 ## 2. Spesifikasi Teknis Perangkat Keras
 
 Sistem menggunakan arsitektur Intel Sandy Bridge yang dikonfigurasi untuk beban kerja server berkelanjutan 24/7.
+
+::: tip OPTIMALISASI KOMPONEN
+Pemisahan antara SSD (sistem) dan HDD (data) dilakukan untuk menjamin responsivitas OS tetap optimal meskipun sedang melakukan transfer data besar pada drive penyimpanan sekunder.
+:::
 
 *   **Unit Pemrosesan dan Motherboard**
     *   CPU: Intel Core i5 2400 (4 Core, 4 Thread, Clock 3.10 GHz hingga Turbo 3.40 GHz).
@@ -52,6 +59,11 @@ Implementasi teknologi open-source standar industri untuk menjamin stabilitas da
 
 *   **Sistem Operasi (Host OS)**
     *   Platform: Ubuntu Server 24.04 LTS (Noble Numbat) sebagai basis utama yang menjamin ketersediaan dukungan keamanan jangka panjang.
+
+::: info TEKNOLOGI KONTAINERISASI
+Seluruh layanan dijalankan di dalam lingkungan terisolasi menggunakan Docker untuk menghindari konflik dependensi dan memudahkan manajemen siklus hidup aplikasi.
+:::
+
 *   **Virtualisasi dan Containerization**
     *   Engine: Docker untuk isolasi layanan dan manajemen dependensi aplikasi secara modular.
     *   Manajemen: Memudahkan siklus deployment tanpa meninggalkan residu pada sistem operasi host.
@@ -64,6 +76,10 @@ Implementasi teknologi open-source standar industri untuk menjamin stabilitas da
 ## 4. Keamanan Jaringan: Paradigma Zero Trust
 
 Pengadopsian standar keamanan korporat untuk melindungi infrastruktur jaringan lokal.
+
+::: danger PROTEKSI JARINGAN
+Sistem sama sekali tidak membuka port forwarding pada router lokal untuk menutup total celah serangan port scanning dan akses tidak sah dari internet publik.
+:::
 
 *   **Cloudflare Tunneling**
     *   Mekanisme: Menciptakan terowongan terenkripsi langsung dari server lokal ke jaringan global Cloudflare.
@@ -78,12 +94,17 @@ Pengadopsian standar keamanan korporat untuk melindungi infrastruktur jaringan l
 
 Keamanan akses administratif menggunakan standar enkripsi kunci publik modern.
 
+::: warning KEBIJAKAN AKSES
+Dilarang keras menggunakan satu akun secara bersama-sama untuk menjaga audit log dan akuntabilitas setiap perubahan sistem yang dilakukan oleh anggota tim.
+:::
+
 *   **Kebijakan Login Sistem**
     *   Autentikasi Password: Dinonaktifkan sepenuhnya untuk mencegah serangan tebak kata sandi.
     *   Standar Akses: Wajib menggunakan SSH Key dengan algoritma ed25519 yang efisien dan aman.
 *   **Manajemen Hak Akses (Least Privilege)**
     *   Isolasi User: Pemisahan akun sistem berdasarkan peran operasional (contoh: user deployer vs user admin).
     *   Audit Akses: Pendaftaran Public Key dilakukan secara manual dan terverifikasi oleh administrator utama.
+
 
 ---
 

@@ -32,6 +32,7 @@ Website dokumentasi dibangun menggunakan framework modern (**VitePress**):
 - **Gaya Penulisan:**
   - **Ringkas & Detail:** Gunakan kalimat yang padat informasi, jelas, dan profesional (high density).
   - **No Icons/Emojis:** Dilarang menggunakan icon atau emoji di dalam konten dokumentasi (kecuali landing page jika sangat diperlukan).
+  - **Visual Callouts:** Gunakan container khusus VitePress (`::: info`, `::: tip`, `::: warning`, `::: danger`) untuk menonjolkan informasi penting, tips, atau peringatan keamanan agar dokumen lebih menarik dan mudah dipahami.
   - **Format Sub-point:** Gunakan daftar bersarang (sub-points) untuk memperjelas hierarki informasi yang kompleks.
 - **Struktur File MD:** Wajib memiliki elemen berikut secara konsisten:
   1. **Title & Frontmatter**: Deskripsi singkat halaman.

@@ -42,9 +42,17 @@ ingress:
 *   **Manajemen Layanan**
     *   Penerapan Perubahan: Setiap modifikasi pada file YAML wajib diikuti dengan perintah `sudo systemctl restart cloudflared`.
 
+::: info RESTART SERVICE
+Pastikan untuk memeriksa status layanan menggunakan `systemctl status cloudflared` setelah melakukan restart untuk memvalidasi bahwa tidak ada kesalahan sintaks pada file konfigurasi.
+:::
+
 ## 3. Manajemen Aplikasi dan Kebijakan Akses
 
 Kontrol akses dilakukan melalui Dashboard Cloudflare Zero Trust untuk menentukan entitas yang diizinkan melewati tunnel.
+
+::: danger KREDENSIAL OTOMATISASI
+Service Token (Client ID dan Secret) harus dijaga kerahasiaannya dan hanya disimpan di dalam GitHub Secrets. Jangan pernah mencantumkan token ini di dalam kode program atau file konfigurasi yang masuk ke repositori.
+:::
 
 *   **Access Policies**
     *   Akses Tim: Menggunakan Action "Allow" dengan Selector "Emails" untuk memberika izin ke anggota tim spesifik melalui verifikasi browser.
