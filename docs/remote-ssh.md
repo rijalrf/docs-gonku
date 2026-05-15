@@ -40,6 +40,16 @@ Setelah key terdaftar, Anda dapat mengakses server melalui terminal.
 
 *   **Format Perintah**
     *   Syntax: `ssh nama_user@ip_atau_domain_server`.
-*   **Penggunaan SSH Config (Opsional)**
-    *   Fungsi: Mempermudah akses tanpa harus mengetik perintah panjang.
-    *   Lokasi: Simpan konfigurasi di file `~/.ssh/config`.
+*   **Penggunaan SSH Config (Wajib)**
+    *   Fungsi: Mengotomatisasi penggunaan `cloudflared` sebagai jembatan (bridge) menuju tunnel server.
+    *   Konfigurasi: Tambahkan blok berikut ke dalam file `~/.ssh/config` (Linux/Mac) atau `C:\Users\Username\.ssh\config` (Windows).
+
+```ssh
+Host ssh.gonku.my.id
+  IdentityFile ~/.ssh/id_ed25519_gonkuserver
+  ProxyCommand cloudflared access ssh --hostname %h
+```
+
+::: warning KETENTUAN CONFIG
+Pastikan path pada `IdentityFile` diarahkan ke lokasi tepat di mana Anda menyimpan Private Key SSH. Untuk pengguna Windows, gunakan format path yang sesuai (contoh: `.\.ssh\id_ed25519_gonkuserver`).
+:::
