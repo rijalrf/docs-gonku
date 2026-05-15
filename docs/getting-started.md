@@ -21,18 +21,25 @@ Sistem ini memungkinkan administrator untuk memiliki kemampuan pengendalian daya
 
 ---
 
-## 2. Arsitektur Perangkat Keras dan Efisiensi Sistem
+## 2. Arsitektur Perangkat Keras dan Spesifikasi Teknis Utama
 
-Pemilihan komponen perangkat keras pada server Gonku telah melalui proses pertimbangan teknis yang matang untuk mencapai keseimbangan antara performa komputasi yang responsif dan efisiensi konsumsi daya untuk operasional jangka panjang selama 24 jam sehari.
+Pemilihan komponen perangkat keras pada server Gonku didasarkan pada kebutuhan untuk mencapai keseimbangan optimal antara performa komputasi yang stabil dan efisiensi konsumsi daya. Server ini ditenagai oleh prosesor Intel Core i5 2400 yang memiliki kecepatan dasar 3,10 GHz dengan kemampuan Turbo Boost hingga 3,40 GHz. Arsitektur prosesor ini mencakup 4 Core dan 4 Thread, yang memberikan kapasitas pemrosesan paralel yang memadai untuk menangani berbagai container Docker secara simultan. Unit pemrosesan ini terpasang pada motherboard dengan chipset Intel H61 (Soket LGA1155), sebuah fondasi yang stabil untuk prosesor Intel generasi Sandy Bridge.
 
-| Komponen Arsitektur | Spesifikasi Teknis | Deskripsi dan Kegunaan Operasional |
+Sistem ini didukung oleh kapasitas memori sebesar 8GB atau 16GB DDR3, yang memungkinkan manajemen memori yang fleksibel untuk beban kerja multi-tasking. Untuk aspek penyimpanan, kami menggunakan konfigurasi dual-storage yang terdiri dari SSD berkapasitas 512GB untuk kecepatan booting sistem operasi dan responsivitas aplikasi yang maksimal, serta HDD berkapasitas 500GB yang difungsikan sebagai media penyimpanan data bervolume besar atau arsip digital.
+
+| Komponen Arsitektur | Spesifikasi Teknis Detil | Deskripsi Fungsi Operasional |
 | :--- | :--- | :--- |
-| **Memori Utama (RAM)** | 8GB DDR Series | Kapasitas ini dialokasikan secara spesifik untuk menangani beban kerja multi-container Docker secara simultan tanpa menurunkan performa sistem secara signifikan saat terjadi lonjakan trafik. |
-| **Media Penyimpanan** | SSD 256GB | Penggunaan Solid State Drive menjamin latensi yang sangat rendah pada proses pembacaan dan penulisan data, yang sangat krusial untuk performa database dan kecepatan proses pembangunan aplikasi pada alur CI/CD. |
-| **Stabilitas Operasional** | Active 24/7 | Seluruh sistem pendinginan dan distribusi daya telah dioptimalkan untuk mampu beroperasi secara stabil tanpa henti, menjamin ketersediaan seluruh layanan tim setiap saat tanpa adanya downtime terjadwal. |
+| **Prosesor (CPU)** | Intel Core i5 2400 | Quad-Core dengan kecepatan hingga 3,40 GHz untuk menangani logika pemrosesan container. |
+| **Motherboard** | Intel H61 (LGA1155) | Fondasi sistem standar yang menjamin kompatibilitas dan stabilitas distribusi data antar komponen. |
+| **Memori (RAM)** | 8GB / 16GB DDR3 | Kapasitas yang memadai untuk manajemen runtime berbagai layanan microservices tanpa bottleneck. |
+| **Grafis (VGA)** | Intel HD Graphics 2000 | Unit grafis terintegrasi yang efisien untuk menangani kebutuhan output visual dasar tanpa konsumsi daya berlebih. |
+| **Penyimpanan Utama** | SSD 512GB | Media penyimpanan utama untuk sistem operasi dan database guna menjamin latensi akses data yang rendah. |
+| **Penyimpanan Data** | HDD 500GB | Kapasitas tambahan yang dialokasikan untuk penyimpanan aset digital dan pencadangan data jangka panjang. |
+| **Catu Daya (PSU)** | 500 Watt | Menjamin ketersediaan daya yang stabil dan aman bagi seluruh komponen selama operasional 24/7. |
+| **Sasis (Casing)** | M-ATX / ATX Gaming | Struktur pelindung dengan manajemen aliran udara yang baik untuk menjaga suhu operasional komponen tetap optimal. |
 
-::: tip OPTIMALISASI SUMBER DAYA
-Meskipun menggunakan perangkat kelas PC rumahan, konfigurasi BIOS dan sistem operasi telah disetel pada mode performa efisien untuk memastikan stabilitas suhu meskipun menangani beban komputasi yang berat dalam durasi yang lama.
+::: tip OPTIMALISASI KOMPONEN
+Penggunaan konfigurasi SSD sebagai drive sistem dan HDD sebagai drive data merupakan standar efisiensi yang kami terapkan untuk memaksimalkan rasio performa terhadap biaya operasional.
 :::
 
 ---
