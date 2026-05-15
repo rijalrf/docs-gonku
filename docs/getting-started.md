@@ -21,25 +21,23 @@ Sistem ini memungkinkan administrator untuk memiliki kemampuan pengendalian daya
 
 ---
 
-## 2. Arsitektur Perangkat Keras dan Spesifikasi Teknis Utama
+## 2. Spesifikasi Teknis Perangkat Keras
 
-Pemilihan komponen perangkat keras pada server Gonku didasarkan pada kebutuhan untuk mencapai keseimbangan optimal antara performa komputasi yang stabil dan efisiensi konsumsi daya. Server ini ditenagai oleh prosesor Intel Core i5 2400 yang memiliki kecepatan dasar 3,10 GHz dengan kemampuan Turbo Boost hingga 3,40 GHz. Arsitektur prosesor ini mencakup 4 Core dan 4 Thread, yang memberikan kapasitas pemrosesan paralel yang memadai untuk menangani berbagai container Docker secara simultan. Unit pemrosesan ini terpasang pada motherboard dengan chipset Intel H61 (Soket LGA1155), sebuah fondasi yang stabil untuk prosesor Intel generasi Sandy Bridge.
+Konfigurasi hardware server Gonku dipilih untuk efisiensi operasional 24/7 dengan performa yang stabil. Sistem ini menggunakan arsitektur Intel Sandy Bridge yang dikombinasikan dengan media penyimpanan dual-drive untuk memisahkan beban sistem dan data.
 
-Sistem ini didukung oleh kapasitas memori sebesar 8GB atau 16GB DDR3, yang memungkinkan manajemen memori yang fleksibel untuk beban kerja multi-tasking. Untuk aspek penyimpanan, kami menggunakan konfigurasi dual-storage yang terdiri dari SSD berkapasitas 512GB untuk kecepatan booting sistem operasi dan responsivitas aplikasi yang maksimal, serta HDD berkapasitas 500GB yang difungsikan sebagai media penyimpanan data bervolume besar atau arsip digital.
+| Komponen | Spesifikasi Teknis Detil |
+| :--- | :--- |
+| **Prosesor (CPU)** | Intel Core i5 2400 (4 Core, 4 Thread, 3.10 GHz - 3.40 GHz) |
+| **Motherboard** | Intel H61 Chipset (Soket LGA1155) |
+| **Memori (RAM)** | 8GB / 16GB DDR3 |
+| **Grafis (VGA)** | Intel HD Graphics 2000 (Integrated) |
+| **Penyimpanan SSD** | 512GB (OS & Boot Drive) |
+| **Penyimpanan HDD** | 500GB (Mass Storage Drive) |
+| **Catu Daya (PSU)** | 500 Watt |
+| **Sasis (Casing)** | M-ATX / ATX Gaming Model |
 
-| Komponen Arsitektur | Spesifikasi Teknis Detil | Deskripsi Fungsi Operasional |
-| :--- | :--- | :--- |
-| **Prosesor (CPU)** | Intel Core i5 2400 | Quad-Core dengan kecepatan hingga 3,40 GHz untuk menangani logika pemrosesan container. |
-| **Motherboard** | Intel H61 (LGA1155) | Fondasi sistem standar yang menjamin kompatibilitas dan stabilitas distribusi data antar komponen. |
-| **Memori (RAM)** | 8GB / 16GB DDR3 | Kapasitas yang memadai untuk manajemen runtime berbagai layanan microservices tanpa bottleneck. |
-| **Grafis (VGA)** | Intel HD Graphics 2000 | Unit grafis terintegrasi yang efisien untuk menangani kebutuhan output visual dasar tanpa konsumsi daya berlebih. |
-| **Penyimpanan Utama** | SSD 512GB | Media penyimpanan utama untuk sistem operasi dan database guna menjamin latensi akses data yang rendah. |
-| **Penyimpanan Data** | HDD 500GB | Kapasitas tambahan yang dialokasikan untuk penyimpanan aset digital dan pencadangan data jangka panjang. |
-| **Catu Daya (PSU)** | 500 Watt | Menjamin ketersediaan daya yang stabil dan aman bagi seluruh komponen selama operasional 24/7. |
-| **Sasis (Casing)** | M-ATX / ATX Gaming | Struktur pelindung dengan manajemen aliran udara yang baik untuk menjaga suhu operasional komponen tetap optimal. |
-
-::: tip OPTIMALISASI KOMPONEN
-Penggunaan konfigurasi SSD sebagai drive sistem dan HDD sebagai drive data merupakan standar efisiensi yang kami terapkan untuk memaksimalkan rasio performa terhadap biaya operasional.
+::: tip MANAJEMEN PENYIMPANAN
+Pemisahan antara SSD (sistem) dan HDD (data) dilakukan untuk menjamin responsivitas OS tetap optimal meskipun sedang melakukan transfer data besar pada drive penyimpanan sekunder.
 :::
 
 ---
