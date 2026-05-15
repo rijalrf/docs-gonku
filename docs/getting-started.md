@@ -13,7 +13,7 @@ Selamat datang di pusat dokumentasi teknis yang menjadi kompas utama bagi pengel
 
 Berbeda dengan infrastruktur berbasis cloud publik, server ini beroperasi sebagai unit fisik yang dikelola secara mandiri (*self-hosted*). Hal ini memberikan kita kendali penuh atas privasi data namun juga menuntut mekanisme pengelolaan fisik yang handal:
 
-* **Lokasi Operasional Strategis**: Seluruh unit perangkat keras utama server ini ditempatkan dan beroperasi secara terpusat di wilayah **Serpong, Tangerang**, yang berfungsi sebagai titik pusat data lokal untuk melayani seluruh trafik domain `gonku.my.id`.
+* **Lokasi Operasional Strategis**: Seluruh unit perangkat keras utama server ini ditempatkan dan beroperasi pada lokasi yang aman dan terkelola secara mandiri, berfungsi sebagai titik pusat data lokal untuk melayani seluruh trafik domain `gonku.my.id`.
 * **Sistem Manajemen Daya Jarak Jauh (Remote Power)**: Untuk memitigasi risiko kegagalan sistem yang tidak responsif secara perangkat lunak, kami mengimplementasikan teknologi **Bardi Smart Home** yang dikombinasikan dengan penggunaan **Modul Relay** fisik.
 * **Kendali Administrator Mutlak**: Integrasi ini memungkinkan administrator untuk memiliki kemampuan pengendalian daya penuh melalui aplikasi seluler. Ini mencakup fungsi *Power On*, *Power Off*, hingga proses *Hard Reboot* instan jika server mengalami kondisi membeku (*system freeze*) yang tidak bisa diatasi melalui jalur akses SSH standar.
 
