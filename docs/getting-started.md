@@ -51,7 +51,7 @@ Sistem menggunakan arsitektur Intel Sandy Bridge yang dikonfigurasi untuk beban 
 Implementasi teknologi open-source standar industri untuk menjamin stabilitas dan kemudahan pemeliharaan.
 
 *   **Sistem Operasi (Host OS)**
-    *   Platform: Ubuntu Server sebagai basis utama yang efisien dan memiliki dukungan keamanan berkala.
+    *   Platform: Ubuntu Server 24.04 LTS (Noble Numbat) sebagai basis utama yang menjamin ketersediaan dukungan keamanan jangka panjang.
 *   **Virtualisasi dan Containerization**
     *   Engine: Docker untuk isolasi layanan dan manajemen dependensi aplikasi secara modular.
     *   Manajemen: Memudahkan siklus deployment tanpa meninggalkan residu pada sistem operasi host.
