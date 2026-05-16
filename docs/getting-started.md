@@ -1,74 +1,127 @@
 ---
 title: Panduan Utama Inisialisasi dan Operasional Home Server Gonku
-description: Dokumentasi komprehensif mengenai infrastruktur digital, standar keamanan, dan alur kerja otomatisasi Home Server Gonku.
+description: Dokumentasi komprehensif mengenai infrastruktur digital, standar keamanan, dan alur kerja otomatisasi Home Server Gonku menggunakan format sub-point teknis.
 ---
 
-# Panduan Utama: Inisialisasi dan Operasional Home Server Gonku
+# Getting Started: Panduan Utama Operasional Gonku
 
-Selamat datang di pusat dokumentasi teknis yang menjadi kompas utama bagi pengelolaan seluruh infrastruktur digital pada ekosistem **Home Server Gonku**. Dokumen ini tidak hanya sekadar memberikan daftar spesifikasi, melainkan dirancang secara komprehensif untuk memberikan pemahaman fundamental bagi setiap anggota tim mengenai bagaimana server ini beroperasi, standar keamanan yang kita terapkan, hingga alur kerja otomatisasi yang menjamin keberlangsungan layanan secara profesional.
+Dokumentasi ini merupakan kompas teknis utama bagi pengelolaan infrastruktur digital pada ekosistem Home Server Gonku. Setiap bagian dirancang untuk memberikan pemahaman teknis yang mendalam mengenai mekanisme operasional, arsitektur keamanan, dan otomatisasi sistem.
 
----
-
-## 1. Penempatan Fisik dan Mekanisme Pengendalian Daya Canggih
-
-Berbeda dengan infrastruktur berbasis cloud publik, server ini beroperasi sebagai unit fisik yang dikelola secara mandiri (*self-hosted*). Hal ini memberikan kita kendali penuh atas privasi data namun juga menuntut mekanisme pengelolaan fisik yang handal:
-
-* **Lokasi Operasional Strategis**: Seluruh unit perangkat keras utama server ini ditempatkan dan beroperasi secara terpusat di wilayah **Serpong, Tangerang**, yang berfungsi sebagai titik pusat data lokal untuk melayani seluruh trafik domain `gonku.my.id`.
-* **Sistem Manajemen Daya Jarak Jauh (Remote Power)**: Untuk memitigasi risiko kegagalan sistem yang tidak responsif secara perangkat lunak, kami mengimplementasikan teknologi **Bardi Smart Home** yang dikombinasikan dengan penggunaan **Modul Relay** fisik.
-* **Kendali Administrator Mutlak**: Integrasi ini memungkinkan administrator untuk memiliki kemampuan pengendalian daya penuh melalui aplikasi seluler. Ini mencakup fungsi *Power On*, *Power Off*, hingga proses *Hard Reboot* instan jika server mengalami kondisi membeku (*system freeze*) yang tidak bisa diatasi melalui jalur akses SSH standar.
+::: info KOMPAS OPERASIONAL
+Infrastruktur beroperasi sebagai unit fisik mandiri (self-hosted) untuk menjamin kedaulatan data penuh tanpa ketergantungan pada pihak ketiga.
+:::
 
 ---
 
-## 2. Arsitektur Perangkat Keras dan Efisiensi Operasional
+## 1. Infrastruktur Fisik dan Manajemen Kendali Daya
 
-Pemilihan komponen perangkat keras pada server ini telah melalui proses pertimbangan yang matang untuk menyeimbangkan antara performa responsif bagi pengguna dan efisiensi konsumsi daya untuk penggunaan jangka panjang:
+Keandalan layanan mandiri bertumpu pada stabilitas pengelolaan perangkat keras dan mitigasi risiko kegagalan daya.
 
-* **Manajemen Memori Utama (RAM)**: Unit ini dilengkapi dengan kapasitas memori sebesar **8GB**, yang secara spesifik dialokasikan untuk menangani beban kerja multi-container Docker secara simultan tanpa menurunkan performa sistem secara signifikan.
-* **Solusi Penyimpanan Berkecepatan Tinggi**: Untuk menjamin latensi yang rendah pada proses pembacaan dan penulisan data, kita menggunakan media penyimpanan **SSD berkapasitas 256GB**. Penggunaan SSD ini sangat krusial terutama saat menangani operasi database dan proses *build* aplikasi pada alur CI/CD.
-* **Keandalan Operasional 24/7**: Arsitektur PC rumahan ini telah dioptimalkan secara khusus untuk mampu beroperasi secara stabil dalam durasi tanpa henti (24 jam sehari, 7 hari seminggu), menjamin bahwa seluruh layanan tim tetap dapat diakses kapan pun dibutuhkan.
+*   **Lokasi dan Penempatan Strategis**
+    *   Pusat Data Lokal: Unit ditempatkan pada lokasi aman yang terkelola secara mandiri sebagai titik pusat data domain gonku.my.id.
+    *   Manajemen Lingkungan: Penempatan memastikan aliran udara optimal untuk menjaga suhu operasional komponen hardware.
+*   **Mekanisme Pengendalian Daya Jarak Jauh**
+    *   Integrasi Teknologi: Penggunaan ekosistem Bardi Smart Home yang dikombinasikan dengan modul relay fisik.
+    *   Fungsi Administrator: Akses penuh via aplikasi seluler untuk prosedur Power On, Power Off, dan Hard Reboot.
+
+::: warning MITIGASI KRITIS
+Jalur kendali daya fisik berfungsi sebagai solusi akhir jika akses remote SSH mengalami system freeze yang tidak dapat diatasi melalui jalur perangkat lunak.
+:::
+
+---
+
+## 2. Spesifikasi Teknis Perangkat Keras
+
+Sistem menggunakan arsitektur Intel Sandy Bridge yang dikonfigurasi untuk beban kerja server berkelanjutan 24/7.
+
+::: tip OPTIMALISASI KOMPONEN
+Pemisahan antara SSD (sistem) dan HDD (data) dilakukan untuk menjamin responsivitas OS tetap optimal meskipun sedang melakukan transfer data besar pada drive penyimpanan sekunder.
+:::
+
+*   **Unit Pemrosesan dan Motherboard**
+    *   CPU: Intel Core i5 2400 (4 Core, 4 Thread, Clock 3.10 GHz hingga Turbo 3.40 GHz).
+    *   Mainboard: Chipset Intel H61 dengan soket LGA1155 untuk stabilitas distribusi data antar komponen.
+*   **Memori dan Output Visual**
+    *   RAM: Kapasitas 8GB atau 16GB DDR3 untuk penanganan multi-container Docker simultan.
+    *   VGA: Intel HD Graphics 2000 terintegrasi untuk efisiensi konsumsi daya sistem.
+*   **Arsitektur Penyimpanan (Dual-Drive)**
+    *   Sistem Utama: SSD 512GB dialokasikan untuk OS, database, dan runtime aplikasi guna menjamin latensi rendah.
+    *   Penyimpanan Data: HDD 500GB dialokasikan untuk mass storage, aset digital, dan pencadangan data jangka panjang.
+*   **Catu Daya dan Sasis**
+    *   PSU: Unit 500 Watt untuk memastikan ketersediaan daya stabil selama operasional beban tinggi.
+    *   Casing: Model Gaming M-ATX/ATX dengan manajemen kabel dan aliran udara yang terencana.
 
 ---
 
 ## 3. Fondasi Ekosistem Perangkat Lunak (Software Stack)
 
-Keandalan layanan Gonku dibangun di atas tumpukan teknologi *open-source* yang telah menjadi standar industri global, memastikan sistem yang stabil, mudah didokumentasikan, dan memiliki dukungan komunitas yang luas:
+Implementasi teknologi open-source standar industri untuk menjamin stabilitas dan kemudahan pemeliharaan.
 
-* **Sistem Operasi Tingkat Server**: Kita menggunakan **Ubuntu Server** sebagai fondasi utama karena reputasinya dalam hal stabilitas, keamanan, dan efisiensi sumber daya yang luar biasa untuk mengelola beban kerja server.
-* **Virtualisasi Tingkat OS dengan Docker**: Untuk menghindari konflik antar aplikasi, seluruh layanan dijalankan di dalam lingkungan terisolasi menggunakan **Docker**. Teknologi container ini memungkinkan kita melakukan manajemen aplikasi (instalasi, pembaruan, hingga penghapusan) secara rapi tanpa meninggalkan residu sampah digital pada sistem operasi utama.
-* **Nginx sebagai Gerbang Utama (Reverse Proxy)**: **Nginx** dikonfigurasi sebagai pelayan depan yang bertugas menerima seluruh permintaan masuk menuju domain `gonku.my.id`. Ia bertanggung jawab mengarahkan trafik tersebut ke container yang tepat, menangani enkripsi SSL, dan menjaga keamanan titik masuk aplikasi kita.
+*   **Sistem Operasi (Host OS)**
+    *   Platform: Ubuntu Server 24.04 LTS (Noble Numbat) sebagai basis utama yang menjamin ketersediaan dukungan keamanan jangka panjang.
 
----
+::: info TEKNOLOGI KONTAINERISASI
+Seluruh layanan dijalankan di dalam lingkungan terisolasi menggunakan Docker untuk menghindari konflik dependensi dan memudahkan manajemen siklus hidup aplikasi.
+:::
 
-## 4. Keamanan Jaringan Global: Implementasi Zero Trust
-
-Kita mengadopsi paradigma keamanan **Zero Trust** untuk memastikan bahwa meskipun server berada di jaringan rumahan, tingkat keamanannya setara dengan infrastruktur korporat:
-
-* **Terowongan Aman Cloudflare (Tunneling)**: Salah satu fitur paling krusial adalah penggunaan **Cloudflare Tunnel**. Teknologi ini menciptakan "terowongan" terenkripsi langsung dari server kita ke jaringan global Cloudflare, sehingga **IP publik asli rumah kita tetap tersembunyi sepenuhnya** dan tidak dapat dilacak dari internet luar.
-* **Eliminasi Port Forwarding**: Bertolak belakang dengan cara tradisional, kita tidak membuka port apapun pada router rumah kita, termasuk Port 22 untuk SSH. Hal ini menutup total celah serangan *port scanning* yang sering menjadi pintu masuk bagi peretas.
-* **Kolaborasi Tim yang Terukur**: Dengan memanfaatkan paket Cloudflare Zero Trust Free, infrastruktur ini mampu menampung hingga **50 anggota tim** secara gratis, memberikan kita ruang yang sangat luas untuk pertumbuhan kolaborasi tanpa biaya tambahan.
-
----
-
-## 5. Protokol Autentikasi dan Kebijakan Akses Kriptografi
-
-Keamanan akses ke jantung server tidak lagi bergantung pada kata sandi yang mudah ditebak, melainkan telah ditingkatkan menggunakan metode enkripsi kunci publik yang sangat kuat:
-
-* **Penonaktifkan Autentikasi Password**: Untuk mencegah serangan tebak kata sandi (*brute-force*), seluruh akses login menggunakan password standar Ubuntu telah **dinonaktifkan secara total**. Upaya login manual menggunakan password akan ditolak secara otomatis oleh sistem.
-* **Standar Wajib SSH Key (ed25519)**: Setiap anggota tim yang memerlukan akses remote wajib menggunakan pasangan kunci SSH dengan algoritma **ed25519**. Metode ini jauh lebih aman dan efisien dibandingkan metode lama, di mana administrator secara manual mendaftarkan *Public Key* setiap pengguna ke dalam daftar resmi server.
-* **Isolasi dan Hak Akses Terbatas (Least Privilege)**: Kita menerapkan pembatasan hak akses yang ketat dengan memisahkan user sistem operasi sesuai perannya. Misalnya, user `admin_gonku` digunakan untuk pemeliharaan sistem utama, sementara user `deployer` dikhususkan hanya untuk mengelola operasional container Docker.
+*   **Virtualisasi dan Containerization**
+    *   Engine: Docker untuk isolasi layanan dan manajemen dependensi aplikasi secara modular.
+    *   Manajemen: Memudahkan siklus deployment tanpa meninggalkan residu pada sistem operasi host.
+*   **Network Entry Point**
+    *   Reverse Proxy: Nginx sebagai gerbang utama pengatur trafik domain gonku.my.id.
+    *   Security: Manajemen enkripsi SSL/TLS dan pengarah trafik ke container aplikasi yang tepat.
 
 ---
 
-## 6. Otomatisasi Siklus Pengembangan (CI/CD)
+## 4. Keamanan Jaringan: Paradigma Zero Trust
 
-Untuk menjamin kecepatan dan akurasi dalam pengiriman fitur baru, kita mengimplementasikan alur kerja otomatisasi penuh menggunakan **GitHub Actions**:
+Pengadopsian standar keamanan korporat untuk melindungi infrastruktur jaringan lokal.
 
-* **Alur Deployment Tanpa Intervensi**: Setiap kali anggota tim melakukan *push* kode ke repositori GitHub, rangkaian robot otomatis akan bekerja untuk membangun (*build*) image aplikasi, mengirimnya ke Docker Hub, dan masuk ke server secara aman untuk memperbarui aplikasi tanpa perlu campur tangan manual.
-* **Autentikasi Terintegrated via Service Token**: Agar proses otomatisasi ini dapat melewati proteksi Cloudflare tanpa hambatan, GitHub Actions menggunakan **Cloudflare Service Token** (terdiri dari Client ID dan Secret). Token ini berfungsi sebagai tanda pengenal digital yang sah, memungkinkan akses otomatis yang tetap aman dan terverifikasi.
-* **Stabilitas Deployment**: Alur ini memastikan bahwa setiap versi aplikasi yang berjalan di server telah teruji secara konsisten melalui skrip workflow yang kita bangun, meminimalkan risiko kesalahan manusia saat proses pembaruan layanan.
+::: danger PROTEKSI JARINGAN
+Sistem sama sekali tidak membuka port forwarding pada router lokal untuk menutup total celah serangan port scanning dan akses tidak sah dari internet publik.
+:::
+
+*   **Cloudflare Tunneling**
+    *   Mekanisme: Menciptakan terowongan terenkripsi langsung dari server lokal ke jaringan global Cloudflare.
+    *   Privasi IP: Menyembunyikan alamat IP publik asli lokasi fisik secara total dari internet luar.
+*   **Eliminasi Celah Serangan**
+    *   Port Security: Tidak ada pembukaan port (port forwarding) pada router lokal, termasuk port 22 (SSH).
+    *   Mitigasi Scanning: Menutup total potensi serangan port scanning dan brute-force eksternal.
 
 ---
 
-> **Langkah Selanjutnya dalam Dokumentasi:**
-> * Untuk rincian mengenai konfigurasi terowongan keamanan, silakan tinjau panduan [Zero Trust Network](./zero-trust-network.md).
-> * Bagi anggota tim baru yang ingin mendaftarkan akses, silakan ikuti instruksi pada [Setup Remote SSH](./remote-ssh.md).
+## 5. Protokol Autentikasi Kriptografi
+
+Keamanan akses administratif menggunakan standar enkripsi kunci publik modern.
+
+::: warning KEBIJAKAN AKSES
+Dilarang keras menggunakan satu akun secara bersama-sama untuk menjaga audit log dan akuntabilitas setiap perubahan sistem yang dilakukan oleh anggota tim.
+:::
+
+*   **Kebijakan Login Sistem**
+    *   Autentikasi Password: Dinonaktifkan sepenuhnya untuk mencegah serangan tebak kata sandi.
+    *   Standar Akses: Wajib menggunakan SSH Key dengan algoritma ed25519 yang efisien dan aman.
+*   **Manajemen Hak Akses (Least Privilege)**
+    *   Isolasi User: Pemisahan akun sistem berdasarkan peran operasional (contoh: user deployer vs user admin).
+    *   Audit Akses: Pendaftaran Public Key dilakukan secara manual dan terverifikasi oleh administrator utama.
+
+
+---
+
+## 6. Otomatisasi Deployment (CI/CD)
+
+Alur kerja otomatisasi untuk menjamin akurasi dan kecepatan pengiriman fitur aplikasi.
+
+*   **Pipeline GitHub Actions**
+    *   Build Process: Otomatisasi pembangunan image Docker dan pengiriman ke registry (Docker Hub).
+    *   Verifikasi Kode: Memastikan setiap perubahan telah melewati tahap build sebelum diterapkan ke server.
+*   **Deployment Berbasis Service Token**
+    *   Autentikasi: Penggunaan Cloudflare Service Token untuk bypass proteksi keamanan secara otomatis dan aman.
+    *   Update Mekanisme: Pembaruan container di server utama dilakukan secara otomatis tanpa intervensi manual administrator.
+
+---
+
+### Navigasi Lanjutan
+*   [Detail Arsitektur Zero Trust Network](./zero-trust-network.md)
+*   [Panduan Setup Remote SSH](./remote-ssh.md)
+*   [Manajemen Troubleshooting](./troubleshooting.md)

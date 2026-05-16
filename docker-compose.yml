@@ -1,0 +1,12 @@
+services:
+  docs-gonku:
+    build:
+      context: .
+      target: dev
+    container_name: docs-gonku
+    volumes:
+      - .:/app
+      - /app/node_modules # Anonymous volume to protect container's node_modules
+    ports:
+      - "8080:5173"
+    restart: unless-stopped
