@@ -19,7 +19,24 @@ Setiap anggota tim wajib memiliki akun sistem sendiri. Penggunaan satu akun seca
     *   Audit Log: Memudahkan pelacakan jika terjadi kesalahan konfigurasi atau masalah keamanan.
     *   Isolasi Environment: File dan konfigurasi pribadi tersimpan aman di direktori home masing-masing.
 
-## 2. Prosedur Pengaturan SSH Key
+## 2. Prasyarat Perangkat Klien (Windows)
+
+Sebelum melakukan pengaturan kunci SSH, pastikan perangkat Windows Anda telah memenuhi persyaratan teknis berikut untuk mendukung koneksi melalui Cloudflare Tunnel.
+
+*   **Verifikasi OpenSSH Client**
+    *   Ketersediaan: Windows 10 dan 11 secara default telah menyertakan OpenSSH Client.
+    *   Pengecekan: Buka Command Prompt (CMD) atau PowerShell dan ketik perintah `ssh`. Pastikan sistem mengenali perintah tersebut.
+*   **Instalasi Cloudflare (cloudflared)**
+    *   Unduh Binari: Akses [Cloudflare Releases](https://github.com/cloudflare/cloudflared/releases/tag/2025.8.1) dan pilih file `cloudflared-windows-amd64.exe`.
+    *   Manajemen File:
+        *   Ubah nama file (`rename`) dari `cloudflared-windows-amd64.exe` menjadi `cloudflared.exe`.
+        *   Buat direktori khusus di path: `C:\Users\<username>\cloudflared\`.
+        *   Pindahkan file `cloudflared.exe` ke dalam direktori tersebut.
+*   **Konfigurasi System PATH**
+    *   Pengaturan: Tambahkan lokasi folder `C:\Users\<username>\cloudflared\` ke dalam **Environment Variables** (pada bagian PATH) agar perintah dapat dijalankan dari mana saja.
+    *   Validasi: Buka jendela CMD baru dan jalankan perintah `cloudflared --version` untuk memastikan instalasi berhasil dan terdeteksi oleh sistem.
+
+## 3. Prosedur Pengaturan SSH Key
 
 Gunakan algoritma ed25519 untuk keamanan dan performa terbaik.
 
@@ -34,7 +51,7 @@ Sangat disarankan untuk menambahkan passphrase saat membuat SSH Key untuk member
     *   Public Key: Berikan file `id_ed25519.pub` kepada administrator.
     *   Verifikasi: Tunggu konfirmasi bahwa key Anda telah dimasukkan ke dalam file `authorized_keys` di user Anda.
 
-## 3. Cara Melakukan Koneksi
+## 4. Cara Melakukan Koneksi
 
 Setelah key terdaftar, Anda dapat mengakses server melalui terminal.
 
