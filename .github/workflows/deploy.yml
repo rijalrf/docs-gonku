@@ -1,0 +1,60 @@
+name: Auto Deploy to Gonku Server
+
+on:
+  push:
+    branches:
+      - main
+      - feature/gh-actions-deploy # For testing during development
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: prod
+          push: true
+          tags: ${{ secrets.DOCKER_USER }}/docs-gonku:latest
+
+  deploy-to-server:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Cloudflare Tunnel Bridge
+        uses: NX1X/cloudflare-tunnel-ssh-action@v2
+        with:
+          cf-access-client-id: ${{ secrets.CF_CLIENT_ID }}
+          cf-access-client-secret: ${{ secrets.CF_CLIENT_SECRET }}
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-host: ${{ secrets.SSH_HOST }}
+          ssh-user: ${{ secrets.SSH_USER }}
+
+      - name: Execute Remote Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            # Pull the latest image
+            docker pull ${{ secrets.DOCKER_USER }}/docs-gonku:latest
+            
+            # Recreate the container
+            docker stop docs-gonku || true
+            docker rm docs-gonku || true
+            docker run -d \
+              --name docs-gonku \
+              -p 8080:80 \
+              --restart always \
+              ${{ secrets.DOCKER_USER }}/docs-gonku:latest
+              
+            # Optional: Clean up unused images to save disk space
+            docker image prune -f
+          EOF
