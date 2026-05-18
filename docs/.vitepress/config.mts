@@ -4,7 +4,6 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Gonku Docs",
   description: "Dokumentasi Resmi Infrastruktur Home Server Gonku",
-  lastUpdated: true,
   cleanUrls: true,
   
   themeConfig: {
@@ -82,14 +81,6 @@ export default defineConfig({
     editLink: {
       pattern: 'https://github.com/rijalrf/docs-gonku/edit/main/docs/:path',
       text: 'Saran perbaikan halaman ini'
-    },
-
-    lastUpdated: {
-      text: 'Terakhir diperbarui',
-      formatOptions: {
-        dateStyle: 'full',
-        timeStyle: 'medium'
-      }
     },
 
     footer: {
